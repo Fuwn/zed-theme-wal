@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC2154
+
 # Your wal colour scheme file
 WAL_COLOURS_FILE="${HOME}/.cache/wal/colors.json"
 # The directory of this script, so that this script can be called from anywhere
@@ -17,26 +19,18 @@ fi
 # Create the themes directory if it does not exist
 mkdir -p "${EXTENSION_DIRECTORY}/themes"
 
-# Bind the colours from the wal colour scheme file to variables
-background=$(jq -r '.special.background' <"${WAL_COLOURS_FILE}")
-foreground=$(jq -r '.special.foreground' <"${WAL_COLOURS_FILE}")
-cursor=$(jq -r '.special.cursor' <"${WAL_COLOURS_FILE}")
-color0=$(jq -r '.colors.color0' <"${WAL_COLOURS_FILE}")
-color1=$(jq -r '.colors.color1' <"${WAL_COLOURS_FILE}")
-color2=$(jq -r '.colors.color2' <"${WAL_COLOURS_FILE}")
-color3=$(jq -r '.colors.color3' <"${WAL_COLOURS_FILE}")
-color4=$(jq -r '.colors.color4' <"${WAL_COLOURS_FILE}")
-color5=$(jq -r '.colors.color5' <"${WAL_COLOURS_FILE}")
-color6=$(jq -r '.colors.color6' <"${WAL_COLOURS_FILE}")
-color7=$(jq -r '.colors.color7' <"${WAL_COLOURS_FILE}")
-color8=$(jq -r '.colors.color8' <"${WAL_COLOURS_FILE}")
-color9=$(jq -r '.colors.color9' <"${WAL_COLOURS_FILE}")
-color10=$(jq -r '.colors.color10' <"${WAL_COLOURS_FILE}")
-color11=$(jq -r '.colors.color11' <"${WAL_COLOURS_FILE}")
-color12=$(jq -r '.colors.color12' <"${WAL_COLOURS_FILE}")
-color13=$(jq -r '.colors.color13' <"${WAL_COLOURS_FILE}")
-color14=$(jq -r '.colors.color14' <"${WAL_COLOURS_FILE}")
-color15=$(jq -r '.colors.color15' <"${WAL_COLOURS_FILE}")
+eval "$(jq -r '
+  .special as $special |
+  .colors as $colors |
+  "background=\($special.background) foreground=\($special.foreground)
+   cursor=\($special.cursor) color0=\($colors.color0) color1=\($colors.color1)
+   color2=\($colors.color2) color3=\($colors.color3) color4=\($colors.color4)
+   color5=\($colors.color5) color6=\($colors.color6) color7=\($colors.color7)
+   color8=\($colors.color8) color9=\($colors.color9) color10=\($colors.color10)
+   color11=\($colors.color11) color12=\($colors.color12)
+   color13=\($colors.color13) color14=\($colors.color14)
+   color15=\($colors.color15)"
+  ' "${WAL_COLOURS_FILE}" || true)"
 
 # Generate the Zed theme
 cat <<EOF >"${THEME_FILE}"
