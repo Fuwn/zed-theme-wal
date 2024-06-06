@@ -36,7 +36,7 @@ You've done it! You should now see your current wal colour scheme applied to Zed
 
 ## Updating
 
-`zed-theme-wal`'s `generate_theme` script is path safe, so feel free to put this in any of your background setting scripts as a hook, or even add a global
+`zed-theme-wal`'s [`generate_theme`](./generate_theme) script is path safe, so feel free to put this in any of your background setting scripts as a hook, or even add a global
 alias to it and run it after you change your wallpaper. Zed will automatically update any local themes you have installed, so you only have to go through the
 above process once!
 
