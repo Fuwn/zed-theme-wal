@@ -1,0 +1,7 @@
+id = "wal-theme"
+name = "wal Theme"
+schema_version = 1
+version = "0.0.1"
+authors = ["Fuwn <contact@fuwn.me>"]
+description = "A theme for the Zed text editor that utilises your wal colour scheme"
+repository = "https://github.com/Fuwn/zed-theme-wal"
